@@ -39,6 +39,16 @@ npm run build    # ray build  — type-checks + bundles
 - **Chat with Ryu** — multi-turn conversation
 - **Search Conversations** — browse Ryu Core conversation history
 
+## Star History
+
+<a href="https://www.star-history.com/?repos=amajorai%2Fryu-raycast&type=date&legend=top-left">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/image?repos=amajorai/ryu-raycast&type=date&theme=dark&legend=top-left" />
+    <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/image?repos=amajorai/ryu-raycast&type=date&legend=top-left" />
+    <img alt="Star History Chart" src="https://api.star-history.com/image?repos=amajorai/ryu-raycast&type=date&legend=top-left" />
+  </picture>
+</a>
+
 ## License
 
 MIT — see [LICENSE](./LICENSE).
