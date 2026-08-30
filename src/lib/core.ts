@@ -6,38 +6,23 @@
 // preferences (configured in Raycast → Extensions → Ryu).
 
 import { getPreferenceValues } from "@raycast/api";
-
-interface Preferences {
-	coreUrl: string;
-	apiToken?: string;
-	defaultAgent?: string;
-}
+import {
+	parseTextDeltaSseLine,
+	resolveConfig,
+	type RaycastPreferences,
+	type RyuConfig,
+} from "./core-config";
 
 export interface ChatMessage {
 	role: "user" | "assistant" | "system";
 	content: string;
 }
 
-export interface RyuConfig {
-	baseUrl: string;
-	token: string | null;
-	defaultAgent: string | null;
-}
-
-const TRAILING_SLASHES = /\/+$/;
+export type { RyuConfig } from "./core-config";
 
 /** Resolve the configured Core endpoint + auth from Raycast preferences. */
 export function getConfig(): RyuConfig {
-	const prefs = getPreferenceValues<Preferences>();
-	const baseUrl = (prefs.coreUrl || "http://localhost:7980").replace(
-		TRAILING_SLASHES,
-		""
-	);
-	const token = prefs.apiToken?.trim() ? prefs.apiToken.trim() : null;
-	const defaultAgent = prefs.defaultAgent?.trim()
-		? prefs.defaultAgent.trim()
-		: null;
-	return { baseUrl, token, defaultAgent };
+	return resolveConfig(getPreferenceValues<RaycastPreferences>());
 }
 
 function headers(config: RyuConfig, extra?: Record<string, string>): HeadersInit {
@@ -113,21 +98,10 @@ export async function streamChat(
 	let full = "";
 
 	const handleLine = (line: string): void => {
-		if (!line.startsWith("data:")) {
-			return;
-		}
-		const payload = line.slice("data:".length).trim();
-		if (payload.length === 0 || payload === "[DONE]") {
-			return;
-		}
-		try {
-			const part = JSON.parse(payload) as { type?: string; delta?: unknown };
-			if (part.type === "text-delta" && typeof part.delta === "string") {
-				full += part.delta;
-				onDelta(part.delta);
-			}
-		} catch {
-			// Ignore keep-alive comments / malformed frames.
+		const delta = parseTextDeltaSseLine(line);
+		if (delta !== null) {
+			full += delta;
+			onDelta(delta);
 		}
 	};
 

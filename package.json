@@ -80,6 +80,7 @@
   "scripts": {
     "build": "ray build",
     "dev": "ray develop",
+    "test": "bun test src/lib/core-config.test.ts",
     "lint": "ray lint",
     "fix-lint": "ray lint --fix",
     "publish": "npx @raycast/api@latest publish"
