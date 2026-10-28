@@ -66,8 +66,11 @@
     }
   ],
   "dependencies": {
-    "@raycast/api": "^1.99.0",
-    "@raycast/utils": "^1.19.1"
+    "@raycast/api": "^2.9.0",
+    "zod": "4.6.6"
+  },
+  "overrides": {
+    "esbuild": "^0.28.1"
   },
   "devDependencies": {
     "@raycast/eslint-config": "^2.0.4",
@@ -80,7 +83,7 @@
   "scripts": {
     "build": "ray build",
     "dev": "ray develop",
-    "test": "bun test src/lib/core-config.test.ts",
+    "test": "bun test src/lib/*.test.ts",
     "lint": "ray lint",
     "fix-lint": "ray lint --fix",
     "publish": "npx @raycast/api@latest publish"

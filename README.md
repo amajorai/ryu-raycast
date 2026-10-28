@@ -10,13 +10,13 @@
 [![License](https://shieldcn.dev/badge/License-MIT-73DC8C.svg?logo=opensourceinitiative&logoColor=white)](./LICENSE)
 [![Stack](https://shieldcn.dev/badge/TypeScript-Raycast-FF6363.svg?logo=raycast&logoColor=white)](../../README.md)
 
-A Raycast extension (macOS **and** Windows) for people who already live in the launcher: Ask Ryu (one-shot, streamed), Chat with Ryu (multi-turn), and Search Conversations. It hits Core directly (Raycast commands run in Node with no browser Origin, so no CORS proxy). It is fenced out of the Bun/Turbo workspace and uses Raycast's own `ray` toolchain. For a standalone always-on-top launcher instead, use the **Ryu Island** command bar (`apps/island`, summoned by the global hotkey).
+A Raycast extension (macOS **and** Windows) for people who already live in the launcher: Ask Ryu (one-shot, streamed), Chat with Ryu (multi-turn), and Search Conversations. It hits Core directly (Raycast commands run in Node with no browser Origin, so no CORS proxy). It is fenced out of the Bun/Turbo workspace and uses Raycast's own `ray` toolchain. A standalone always-on-top launcher, the **Ryu Island** command bar (`apps/island`), is in development but is not available in the current desktop release.
 
 **Tier:** OSS — MIT
 
 ## Stack
 
-- Raycast `@raycast/api` + `@raycast/utils` + React + TypeScript
+- Raycast `@raycast/api` + React + TypeScript
 - Talks to Core (`http://localhost:7980`) directly
 - Own `ray` CLI toolchain (fenced from the monorepo workspace)
 
